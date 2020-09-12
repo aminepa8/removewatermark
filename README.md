@@ -6,6 +6,7 @@ Removing metadata and watermark from camscanner pdf
 python medscript.py -i <inputfile>
 ```
 
-* Script Requirements
-    * Python Version 3.*
+* Install  Requirements
     * pip install -r requirements.txt
+
+Python Version 3.7
