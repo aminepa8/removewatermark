@@ -22,8 +22,10 @@ def main(argv):
   
 
 def RemoveWaterMarkAndMetadata(pdfFileName):
+   #Banner Code
     custom_fig = Figlet(font='epic')
     print(custom_fig.renderText('By Moulay'))
+   #End Banner Code
     print('==========================Disclaimer==========================')
     print(' This script is for educational purposes only')
     print('==============================================================')
@@ -39,7 +41,7 @@ def RemoveWaterMarkAndMetadata(pdfFileName):
 
     #canvas.roundRect(left, bottom, width, height, radius):
     can.setFillColorRGB(255,255,255) #fill with white color
-    can.roundRect(355, 3, 100, 20, 4, stroke=0, fill=1)
+    can.roundRect(5, 3, 800, 20, 4, stroke=0, fill=1)
 
     can.save()
 
