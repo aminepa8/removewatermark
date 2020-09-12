@@ -1,9 +1,15 @@
 # Remove watermark and metadata
 This script is for educational purposes only
-Removing metadata and watermark from camscanner pdf
-* Example Usage:
+Removing metadata and the bottom watermark from pdf
+
+* Example one file Usage:
 ```python
 python medscript.py -i <inputfile>
+```
+
+* Example N files Usage:
+```python
+python medscript.py -list file1.pdf file2.pdf fileN.pdf
 ```
 
 * Install  Requirements

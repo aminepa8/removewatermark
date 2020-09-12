@@ -7,18 +7,21 @@ from pyfiglet import Figlet
 
 def main(argv):
    inputfile = ''
-   try:
-      opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
-   except getopt.GetoptError:
-      print ('test.py -i <inputfile> ')
-      sys.exit(2)
-   for opt, arg in opts:
-      if opt == '-h':
-         print( 'python medscript.py -i <inputfile> ')
-         sys.exit()
-      elif opt in ("-i", "--ifile"):
-         inputfile = arg
-         RemoveWaterMarkAndMetadata(inputfile)
+   if sys.argv[1] == '-h':
+        print( 'python medscript.py -i <inputfile> ')
+        sys.exit()
+   elif sys.argv[1]=='-i':
+        inputfile = sys.argv[2]
+        RemoveWaterMarkAndMetadata(inputfile)
+   if sys.argv[1]=="-list":
+      print("LOL")
+      arrayArgument = sys.argv
+      number = 2
+      ArrayLength = len(sys.argv)
+      for number in range(ArrayLength):
+         if number >=2: #skip script name and parma name
+            RemoveWaterMarkAndMetadata(arrayArgument[number])
+
   
 
 def RemoveWaterMarkAndMetadata(pdfFileName):
