@@ -1,0 +1,3 @@
+reportlab==3.5.49
+pyfiglet==0.8.post1
+PyPDF2==1.26.0
