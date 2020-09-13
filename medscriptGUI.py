@@ -1,32 +1,16 @@
+'''MedScript GUI 
+beta version 0.1
+bug : progressbar
 '''
-@author: Moulay
 
-'''
+import PySimpleGUI as sg
 from PyPDF2 import PdfFileWriter, PdfFileReader
 from PyPDF2.generic import NameObject, createStringObject
 import io ,sys, getopt,os
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
 from pyfiglet import Figlet
-
-def main(argv):
-   inputfile = ''
-   if sys.argv[1] == '-h':
-        print( 'python medscript.py -i <inputfile> ')
-        sys.exit()
-   elif sys.argv[1]=='-i':
-        inputfile = sys.argv[2]
-        RemoveWaterMarkAndMetadata(inputfile)
-   if sys.argv[1]=="-list":
-      print("LOL")
-      arrayArgument = sys.argv
-      number = 2
-      ArrayLength = len(sys.argv)
-      for number in range(ArrayLength):
-         if number >=2: #skip script name and parma name
-            RemoveWaterMarkAndMetadata(arrayArgument[number])
-
-  
+import time , random
 
 def RemoveWaterMarkAndMetadata(pdfFileName):
    #Banner Code
@@ -71,5 +55,45 @@ def RemoveWaterMarkAndMetadata(pdfFileName):
     print("Removed WaterMark and MetaData :"+ NewFileName)
 
     pass
-if __name__ == "__main__":
-   main(sys.argv[1:])
+
+
+sg.theme('Dark')  # please make your windows colorful
+radio_choices = ['one pdf file', 'multiple pdf Files']
+r_keys = ['-R1-', '-R2-']
+
+while True:
+    progressDur = 1000 #usually one pdf file would took less then 1s
+    if len(sys.argv) == 1:
+        window =sg.Window('MedScript WaterMark Remover',
+                        [[sg.Text('Choose pdf')],
+                        [sg.Input(key='_FILES_'), sg.FilesBrowse(file_types=(("PDF Files", "*.pdf"),))],
+                        [sg.Open('Hide WaterMark'), sg.Cancel()],
+                        [sg.ProgressBar(progressDur, orientation='h', size=(35, 15), key='progbar')],
+                        ])
+        event, values = window.Read(close=True)
+        fname = values['_FILES_'].split(';')
+    else:
+        fname = sys.argv[1]
+
+    if event == 'Cancel':
+        sg.popup("Bye !!!!", "Canceled By the user")
+        raise SystemExit("Cancelling: no filename supplied")
+        break
+    else:
+        if  fname !=['']:
+            
+            FilesList = values['_FILES_'].split(';')
+            NumberOfFiles = len(FilesList)
+            progressDur = NumberOfFiles * progressDur
+            i = 0
+            for FileElement in FilesList:
+                window.Element('progbar').UpdateBar(i + 500) 
+                RemoveWaterMarkAndMetadata(FileElement)
+                window.Element('progbar').UpdateBar(i + 500) 
+                sg.popup('File saved in the same folder as the program')
+        else:
+            sg.popup('You did not choose any File yet')
+    if event == 'Quit':
+        break
+
+
