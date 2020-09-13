@@ -5,7 +5,7 @@ Removing metadata and the bottom watermark from pdf
 
 * Install  Requirements
     * pip install -r requirements.txt
-Python Version 3.7
+    * Python Version 3.7
 
 * Example one file Usage:
 ```python
